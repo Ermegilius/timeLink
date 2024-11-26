@@ -35,15 +35,29 @@ function App() {
   };
 
   return (
-    <>
-      <h1>Time Link</h1>
+    <div>
+      <h1 className="text-3xl font-bold">Time Link</h1>
       <h3>The Numbers of Users: {users.length}</h3>
-      <form onSubmit={handleAddUser}>
-        <input type="text" name="name" id="" />
+      <form className="flex-col gap-2 m-2" onSubmit={handleAddUser}>
+        <input
+          type="text"
+          name="name"
+          id=""
+          className="border border-slate-900"
+        />
         <br />
-        <input type="email" name="email" id="" />
+        <input
+          type="email"
+          name="email"
+          id=""
+          className="border border-slate-900"
+        />
         <br />
-        <input type="submit" value="Add User" />
+        <input
+          type="submit"
+          value="Add User"
+          className="border border-slate-900 rounded-lg m-4 p-2 bg-black text-white"
+        />
       </form>
       <div>
         {users.map((user) => (
@@ -52,7 +66,7 @@ function App() {
           </p>
         ))}
       </div>
-    </>
+    </div>
   );
 }
 
