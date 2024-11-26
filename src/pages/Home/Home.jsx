@@ -7,7 +7,7 @@ const Home = () => {
       <p>
         You just need to solve the riddle to progress throughout the game. Each
         time you answer correctly, you will be rewarded and progress to the next
-        stage.
+        stage. Happy Gaming :)
       </p>
 
       <div className="flex w-full">
