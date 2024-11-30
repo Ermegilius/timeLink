@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Home = () => {
   return (
     <div>
@@ -13,24 +15,21 @@ const Home = () => {
       <div className="flex w-full">
         {/* Login */}
         <div className="card bg-base-300 rounded-box grid h-20 flex-grow place-items-center">
-          {/* Need to add the button functionality */}
-          <button>Login</button>
+          <Link to="/login">Login</Link>
         </div>
 
         <div className="divider divider-horizontal">OR</div>
 
         {/* Register */}
         <div className="card bg-base-300 rounded-box grid h-20 flex-grow place-items-center">
-          {/* Need to add the button functionality */}
-          <button>Register</button>
+          <Link to="/register">Register</Link>
         </div>
 
         <div className="divider divider-horizontal">OR</div>
 
         {/* Guest */}
         <div className="card bg-base-300 rounded-box grid h-20 flex-grow place-items-center">
-          {/* Need to add the button functionality */}
-          <button>Play as Guest</button>
+          <Link to="/gameplay">Play as Guest</Link>
         </div>
       </div>
     </div>
