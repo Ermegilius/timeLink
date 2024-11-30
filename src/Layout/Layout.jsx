@@ -1,11 +1,13 @@
 import { Outlet } from "react-router-dom";
+import NavBar from "../components/NavBar/NavBar";
+import Footer from "../components/Footer/Footer";
 
 const Layout = () => {
   return (
     <div>
-      {/* Ekhane Header Boshbe */}
+      <NavBar></NavBar>
       <Outlet></Outlet>
-      {/* Ekhane footer boshbe */}
+      <Footer></Footer>
     </div>
   );
 };
