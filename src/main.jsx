@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+import React from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -8,6 +8,7 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import GameplayPage from "./pages/GameplayPage/GameplayPage";
+import AuthProvider from "./providers/AuthProvider";
 
 const router = createBrowserRouter([
   {
@@ -36,9 +37,11 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <div className="bg-[#D4F9CF]">
-      <RouterProvider router={router} />
-    </div>
-  </StrictMode>
+  <div className="bg-[#D4F9CF]">
+    <React.StrictMode>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </React.StrictMode>
+  </div>
 );

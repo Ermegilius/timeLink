@@ -3,9 +3,9 @@ import Banner from "../../components/Banner/Banner";
 
 const Home = () => {
   return (
-    <div>
+    <div className="h-screen">
       <Banner></Banner>
-      <div className="flex w-full justify-center">
+      <div className="flex gap-10 w-full h-full justify-center items-center">
         {/* Login */}
         <div className="">
           <Link to="/login">
@@ -13,16 +13,12 @@ const Home = () => {
           </Link>
         </div>
 
-        <div className="divider divider-horizontal">OR</div>
-
         {/* Register */}
         <div className="">
           <Link to="/register">
             <button>Register</button>
           </Link>
         </div>
-
-        <div className="divider divider-horizontal">OR</div>
 
         {/* Guest */}
         <div className="">
