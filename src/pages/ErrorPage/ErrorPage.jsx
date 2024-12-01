@@ -8,11 +8,13 @@ const ErrorPage = () => {
       <div className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
         <img className="w-1/3" src={ErrorImage} alt="" />
         <div className="max-w-md text-center">
-          <p className="text-2xl font-semibold md:text-3xl mb-8">
+          <p className="text-2xl font-semibold md:text-3xl mb-8 text-[#5C48BC]">
             {error?.message}
           </p>
-          <Link to="/" className="btn border-none font-semibold p-3 rounded-lg">
-            Back to homepage
+          <Link to="/">
+            <button className="p-3 font-semibold  rounded-lg shadow-md">
+              Back to homepage
+            </button>
           </Link>
         </div>
       </div>
