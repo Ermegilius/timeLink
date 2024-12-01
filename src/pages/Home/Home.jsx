@@ -1,17 +1,10 @@
 import { Link } from "react-router-dom";
+import Banner from "../../components/Banner/Banner";
 
 const Home = () => {
   return (
     <div>
-      <h1 className="text-3xl font-bold">
-        Welcome to the Time Link - A Browser Based Online Escape Game
-      </h1>
-      <p>
-        You just need to solve the riddle to progress throughout the game. Each
-        time you answer correctly, you will be rewarded and progress to the next
-        stage. Happy Gaming :)
-      </p>
-
+      <Banner></Banner>
       <div className="flex w-full">
         {/* Login */}
         <div className="card bg-[#f9ff87] rounded-box grid h-20 flex-grow place-items-center shadow-md">
