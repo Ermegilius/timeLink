@@ -12,9 +12,7 @@ const ErrorPage = () => {
             {error?.message}
           </p>
           <Link to="/">
-            <button className="p-3 font-semibold  rounded-lg shadow-md">
-              Back to homepage
-            </button>
+            <button className="">Back to homepage</button>
           </Link>
         </div>
       </div>

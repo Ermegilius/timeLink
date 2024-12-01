@@ -5,9 +5,9 @@ const Home = () => {
   return (
     <div>
       <Banner></Banner>
-      <div className="flex w-full">
+      <div className="flex w-full justify-center">
         {/* Login */}
-        <div className="card bg-[#f9ff87] rounded-box grid h-20 flex-grow place-items-center shadow-md">
+        <div className="">
           <Link to="/login">
             <button>Login</button>
           </Link>
@@ -16,7 +16,7 @@ const Home = () => {
         <div className="divider divider-horizontal">OR</div>
 
         {/* Register */}
-        <div className="card bg-[#f9ff87] rounded-box grid h-20 flex-grow place-items-center shadow-md">
+        <div className="">
           <Link to="/register">
             <button>Register</button>
           </Link>
@@ -25,7 +25,7 @@ const Home = () => {
         <div className="divider divider-horizontal">OR</div>
 
         {/* Guest */}
-        <div className="card bg-[#f9ff87] rounded-box grid h-20 flex-grow place-items-center shadow-md">
+        <div className="">
           <Link to="/gameplay">
             <button>Play as Guest</button>
           </Link>
