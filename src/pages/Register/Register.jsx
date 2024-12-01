@@ -3,12 +3,12 @@ const Register = () => {
     <div className="hero min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-          <form className="card-body">
+          <form className="card-body rounded-lg bg-[#BBBBFF] border-[#5C48BC] border-2">
             <h1 className="font-bold text-3xl">Register</h1>
             {/* Username */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Username</span>
+                <span className="label-text text-[#5C48BC]">Username</span>
               </label>
               <input
                 type="name"
@@ -20,7 +20,7 @@ const Register = () => {
             {/* Email */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Email</span>
+                <span className="label-text text-[#5C48BC]">Email</span>
               </label>
               <input
                 type="email"
@@ -32,7 +32,7 @@ const Register = () => {
             {/* Password */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Password</span>
+                <span className="label-text text-[#5C48BC]">Password</span>
               </label>
               <input
                 type="password"
@@ -42,7 +42,9 @@ const Register = () => {
               />
             </div>
             <div className="form-control mt-6">
-              <button className="p-2 rounded-lg">Register</button>
+              <button className="p-2 rounded-lg text-[#5C48BC]">
+                Register
+              </button>
             </div>
           </form>
         </div>
