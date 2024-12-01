@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Login = () => {
   return (
     <div className="hero min-h-screen">
@@ -35,8 +37,11 @@ const Login = () => {
                 </a>
               </label>
             </div>
-            <div className="form-control mt-6">
-              <button className="p-3 rounded-lg  text-[#5C48BC]">Login</button>
+            <div className="form-control mt-6 flex  items-center">
+              <button className="">Login</button>
+              <Link to="gameplay">
+                <button>Play as Guest</button>
+              </Link>
             </div>
           </form>
         </div>

@@ -48,7 +48,7 @@ function GameplayPage({ onLogOut }) {
     <main>
       <Banner></Banner>
       <div className="boxForTitle"></div>
-      <div className="boxForGameplayAndMenu">
+      <div className="boxForGameplayAndMenu my-5">
         <div className="boxForGameplay">
           <div className="playboard-grid" id="playboard-grid">
             {[...Array(294)].map((_, index) => (
