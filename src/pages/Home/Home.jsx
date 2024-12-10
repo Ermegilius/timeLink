@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Banner from "../../components/Banner/Banner";
+import Banner from "../../components/WelcomeBanner/WelcomeBanner";
 
 const Home = () => {
   return (

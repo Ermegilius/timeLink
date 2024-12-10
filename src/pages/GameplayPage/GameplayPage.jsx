@@ -8,7 +8,7 @@ import settingsIcon from "../../assets/icons8-settings.svg";
 import placeAlienOnGrid from "../../utilities/placeAlienOnGrid";
 import Modal from "../../components/GamePlay/Modal/Modal";
 import Button from "../../components/Button/Button";
-import Banner from "../../components/Banner/Banner";
+import Banner from "../../components/WelcomeBanner/WelcomeBanner";
 
 const gameplayFields = [116, 73, 200, 48, 212, 106, 191, 52, 165, 82, 223, 140]; // Playable fields
 
