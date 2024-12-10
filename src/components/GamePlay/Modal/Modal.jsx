@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./Modal.css";
 import ShowRiddle from "../ShowRiddle/ShowRiddle";
 
 const Modal = ({ isOpen, onClose, handleCorrectAnswer }) => {
