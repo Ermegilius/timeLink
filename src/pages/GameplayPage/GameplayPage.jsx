@@ -7,6 +7,7 @@ import starIcon from "../../assets/icons8-star-96.png";
 import placeAlienOnGrid from "../../utilities/placeAlienOnGrid";
 import Modal from "../../components/GamePlay/Modal/Modal";
 import Button from "../../components/Button/Button";
+import MusicPlayer from '../../components/MusicPlayer/MusicPlayer';//music player component
 
 const gameplayFields = [116, 87, 200, 48, 212, 120, 205, 52, 165, 82, 223, 154]; // Playable fields
 
@@ -91,7 +92,7 @@ function GameplayPage({ onLogOut }) {
             />
           </div>
           <div className="musicBox w-[180px] h-32 p-1 bg-[#fefffa] rounded-md border-2 border-[#8168fe] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-            <p>Box for radio/music</p>
+            <MusicPlayer/>
           </div>
 
          {/* <Button text="Exit" onClick={onLogOut} data-role="primary" className="mt-6"/>
