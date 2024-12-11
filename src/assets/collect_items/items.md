@@ -4,7 +4,7 @@
 - Mesozoic: Dinosaurs
 - Cenozoic: birds
 - Paleolithic: Hand axe
-- Mesolithic: Microlith
+- Mesolithic: Microlith [Text: The ice is gone, large forests, rivers and large bottomlands. The stonetools are small (microliths).]
 - Neolithic: neolithic ceramic
 - Bronze Age: bronze bracelet
   https://frag-lio.de/malvorlage-schmuck-der-bronzezeit/
