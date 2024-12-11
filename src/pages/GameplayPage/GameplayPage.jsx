@@ -10,6 +10,18 @@ import Button from "../../components/Button/Button";
 import MusicPlayer from '../../components/MusicPlayer/MusicPlayer';//music player component
 
 const gameplayFields = [116, 87, 200, 48, 212, 120, 205, 52, 165, 82, 223, 154]; // Playable fields
+const gameplayTimes = ['Archean: You see a water world with a little bit land. There are microbial mats living here.',
+  'Phanerozoic: You see the first more multicellular life forms in the gigantic oceans.',
+  'Paleozoic: You witness the cambrian explosion, you see fish, amphibians and reptiles.',
+  'Mesozoic: You are standing in a conifer forest surrounded by gigantic dinosaurs.',
+  'Paleolithic: It is cool and dry, must be some ice-age. There are people using tools, painting, hunting and talking. ',
+  'Neolithic: You see large forests, rivers and bottomlands. There are houses, people are farming and trade.',
+  'Iron Age: The production of smelted iron is everywhere. People living in cities, having temples and water pipes.',
+  '15th century: Banking and accounting are founded, the invention of the movable type begins the printing press.',
+  '17th century: Early modern period where big cities and kingdoms are. The microscope is invented.',
+  '1879: You are in Thomas Edisons lab in New Jersey. He just invented a incandescent light bulb.',
+  '1969: You are witness of the first time when people were leaving the earth to land on the moon - Explorers like you!',
+  '2007: You are visitor at the Macworld keynote where Steve Jobs introduces the iPhone, the first smartphone.']; // Timeperiods related to fields
 
 function GameplayPage({ onLogOut }) {
   const [currentFieldIndex, setCurrentFieldIndex] = useState(0);
@@ -48,8 +60,8 @@ function GameplayPage({ onLogOut }) {
       <div className="boxForGameplayAndMenu flex flex-row flex-nowrap gap-12 w-full h-[79.8vh]">
         <div className="boxForGameplayAndItems flex flex-col flex-nowrap w-full h-full relative z-20 border-2 border-[#8168fe] rounded-md shadow-[0_4px_4px_rgba(0,0,0,0.25),0_3px_6px_rgba(0,0,0,0.22)]">
           <div className="boxForGameplay block h-full w-full">
-          <div className="playboard h-80 w-full z-10 absolute opacity-100">
-                {<img className="playboard-img" src={boardImage} alt="game playboard" />}
+            <div className="playboard h-80 w-full z-10 absolute opacity-100">
+              {<img className="playboard-img" src={boardImage} alt="game playboard" />}
             </div>
             <div className="playboard-grid grid grid-cols-14 gap-0 h-full w-full z-20" id="playboard-grid">
               {[...Array(294)].map((_, index) => (
@@ -67,7 +79,7 @@ function GameplayPage({ onLogOut }) {
                 key={index}
                 className="item flex justify-center items-center bg-[#fefffa] h-[70px] w-[10%] p-2 border-l border-r border-[#8168fe]"
               >
-                <img src={icon} className="lockIcon w-[40px] mx-4"  alt="icon" />
+                <img src={icon} className="lockIcon w-[40px] mx-4" alt="icon" />
               </div>
             ))}
           </div>
@@ -77,9 +89,8 @@ function GameplayPage({ onLogOut }) {
             <img src={userPic} className="align-self-end w-[180px] max-h-[80px] pt-2 pr-4 pl-2 bg-[#fefffa] rounded-t-md border-b-[1px] border-l-2 border-r-2 border-t-2 border-[#8168fe]" alt="little Alien" />
             <h3 id="userName" className="text-[18px] bg-[#fefffa] w-[180px] py-0.5 rounded-b-md border-b-2 border-l-2 border-r-2 border-[#8168fe] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">Username</h3>
           </div>
-          <div id="gameProgress" className="gameProgress h-36 w-[180px] mt-4 mb-0 p-1 bg-[#fefffa] rounded-md border-2 border-[#8168fe] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-            <p>Currently in:</p>
-            <p>{gameplayFields[currentFieldIndex]}</p>
+          <div id="gameProgress" className="gameProgress h-38 w-[180px] mt-4 mb-0 p-1 bg-[#fefffa] rounded-md border-2 border-[#8168fe] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
+            <p>{`You are in ${gameplayTimes[currentFieldIndex]}`}</p>
           </div>
           <div>
             <Button text="Next riddle" onClick={openModal} className="my-0" />
@@ -92,10 +103,10 @@ function GameplayPage({ onLogOut }) {
             />
           </div>
           <div className="musicBox w-[180px] h-32 p-1 bg-[#fefffa] rounded-md border-2 border-[#8168fe] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-            <MusicPlayer/>
+            <MusicPlayer />
           </div>
 
-         {/* <Button text="Exit" onClick={onLogOut} data-role="primary" className="mt-6"/>
+          {/* <Button text="Exit" onClick={onLogOut} data-role="primary" className="mt-6"/>
           <div id="settings">
             <a href="#">
               <img
