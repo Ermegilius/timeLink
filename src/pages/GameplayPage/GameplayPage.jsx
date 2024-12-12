@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+// import {setTimeout} ...
 import boardImage from '../../assets/gameboard.png';
 import userPic from "../../assets/userpic.svg";
 import alienImage from "../../assets/alienbob.png";
@@ -11,7 +12,7 @@ import MusicPlayer from '../../components/MusicPlayer/MusicPlayer';//music playe
 
 const gameplayFields = [116, 87, 200, 48, 212, 120, 205, 52, 165, 82, 223, 154]; // Playable fields
 const gameplayTimes = ['Archean: You see a water world with a little bit land. There are microbial mats living here.',
-  'Phanerozoic: You see the first more multicellular life forms in the gigantic oceans.',
+  'Phanerozoic: You see the first multicellular life forms in the gigantic oceans.',
   'Paleozoic: You witness the cambrian explosion, you see fish, amphibians and reptiles.',
   'Mesozoic: You are standing in a conifer forest surrounded by gigantic dinosaurs.',
   'Paleolithic: It is cool and dry, must be some ice-age. There are people using tools, painting, hunting and talking. ',
@@ -21,7 +22,7 @@ const gameplayTimes = ['Archean: You see a water world with a little bit land. T
   '17th century: Early modern period where big cities and kingdoms are. The microscope is invented.',
   '1879: You are in Thomas Edisons lab in New Jersey. He just invented a incandescent light bulb.',
   '1969: You are witness of the first time when people were leaving the earth to land on the moon - Explorers like you!',
-  '2007: You are visitor at the Macworld keynote where Steve Jobs introduces the iPhone, the first smartphone.']; // Timeperiods related to fields
+  '2007: You are visitor at the Macworld keynote where Steve Jobs introduces the iPhone, the first smartphone.']; // Timeperiods will be shown in the display
 
 function GameplayPage({ onLogOut }) {
   const [currentFieldIndex, setCurrentFieldIndex] = useState(0);
