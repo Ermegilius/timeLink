@@ -45,15 +45,18 @@ const Modal = ({ isOpen, onClose, handleCorrectAnswer }) => {
     ) {
       setModalText("Correct! You earned a reward.");
       setBgColor("bg-green-500");
-      onClose(); // Close the modal
-      setModalText(""); // resets the text
+      setTimeout(() => {
+        onClose(); // Close the modal
+        setModalText(""); // resets the text after timeout
+      }, 2000);
       handleCorrectAnswer(); // Call the correct answer handler
     } else {
       setModalText("Incorrect answer. Try again.");
       setBgColor("bg-red-500");
     }
     setTimeout(() => {
-      setBgColor(""); // sets it back after 1 sec
+      setBgColor(""); // sets it back after 0.7 sec
+      setModalText("");
     }, 700);
   };
 

@@ -33,13 +33,6 @@ function GameplayPage({ onLogOut }) {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  /*  const closeModal = async (noclicki) => { // should create a timeout when clicking the correct answer
-     if (noclicki) {
-       await setTimeout(2500);
-     }
-     setIsModalOpen(false);
-   } */
-
   // Initialize the avatar at the starting grid
   useEffect(() => {
     const startingFieldId = `${gameplayFields[0]}`; // Get the starting grid ID
