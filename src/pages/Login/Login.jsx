@@ -1,18 +1,25 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import app from "../../firebase/firebase.config";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const auth = getAuth(app);
 
 const Login = () => {
   const { logIn } = useContext(AuthContext);
 
+  // Google login provider
   const googleProvider = new GoogleAuthProvider();
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  // Redirecting user to their previous location
+  const navigate = useNavigate();
+  // const location = useLocation();
+  // const from = location.state?.from?.pathname || "/";
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -25,11 +32,20 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          width: 400,
+          title: "Login Successful",
+          showConfirmButton: false,
+          timer: 2000,
+        });
         setSuccess("Login Successful!");
         setError("");
+        navigate("/gameplay", { replace: true });
       })
       .catch((error) => {
-        setError("Email or Password is invalid!");
+        setError("Email or Password is invalid!", error);
       });
   };
 
@@ -39,8 +55,17 @@ const Login = () => {
       .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          width: 400,
+          title: "Login Successful",
+          showConfirmButton: false,
+          timer: 2000,
+        });
         setSuccess("Login Successful!");
         setError("");
+        navigate("/gameplay", { replace: true });
       })
       .catch((error) => {
         setError(error.message);
@@ -90,7 +115,9 @@ const Login = () => {
             </div>
             <div className="form-control mt-6 flex  items-center">
               <button className="w-48">Login</button>
-              <button className="w-48" onClick={handleGoogleLogin}>Sign in with Google</button>
+              <button className="w-48" onClick={handleGoogleLogin}>
+                Sign in with Google
+              </button>
               <Link to="/gameplay">
                 <button className="w-48">Play as Guest</button>
               </Link>

@@ -1,10 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useContext } from "react";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const { createUser } = useContext(AuthContext);
 
+  // Redirecting user after registration
+  const navigate = useNavigate();
   const handleRegister = (e) => {
     e.preventDefault();
 
@@ -18,7 +21,17 @@ const Register = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          width: 400,
+          title: "Registration Successful",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        navigate("/gameplay");
       })
+
       .catch((error) => console.log(error));
   };
 
@@ -70,7 +83,7 @@ const Register = () => {
             <div className="form-control mt-4 flex items-center">
               <button className="w-48">Register</button>
               <Link to="/gameplay">
-              <button className="w-48">Play as Guest</button>
+                <button className="w-48">Play as Guest</button>
               </Link>
               <p className="mt-4 mb-4">
                 Already have an account?{" "}
