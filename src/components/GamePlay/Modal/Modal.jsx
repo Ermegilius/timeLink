@@ -4,6 +4,8 @@ import ShowRiddle from "../ShowRiddle/ShowRiddle";
 const Modal = ({ isOpen, onClose, handleCorrectAnswer }) => {
   const [riddle, setRiddle] = useState(null);
   const [answers, setAnswers] = useState([]);
+  const [modalText, setModalText] = useState("");
+  const [bgColor, setBgColor] = useState("");
 
   useEffect(() => {
     if (isOpen) {
@@ -38,22 +40,30 @@ const Modal = ({ isOpen, onClose, handleCorrectAnswer }) => {
 
   const handleAnswerSubmit = (selectedAnswer) => {
     if (
-      selectedAnswer.trim().toLowerCase() ===
+      selectedAnswer.trim().toLowerCase() === // need that trim & lowercase when we have to type the answer
       riddle?.answer?.trim().toLowerCase()
     ) {
-      alert("Correct! You earned a reward.");
+      setModalText("Correct! You earned a reward.");
+      setBgColor("bg-green-500");
       onClose(); // Close the modal
+      setModalText(""); // resets the text
       handleCorrectAnswer(); // Call the correct answer handler
     } else {
-      alert("Incorrect answer. Try again.");
+      setModalText("Incorrect answer. Try again.");
+      setBgColor("bg-red-500");
     }
+    setTimeout(() => {
+      setBgColor(""); // sets it back after 1 sec
+    }, 700);
   };
 
   if (!isOpen) return null;
-
+  // <div className="iddle-section mt-12"> + R ?
   return (
-    <div className="modal-overlay fixed inset-0 bg-[#0f0831] bg-opacity-50 flex justify-center items-center z-50">
+    <div className={`modal-overlay fixed inset-0 bg-[#0f0831] bg-opacity-50 flex justify-center items-center z-50 ${bgColor}`}>
       <div className="modal-content bg-[#fefffa] p-6 rounded-lg relative w-4/5 max-w-xl max-h-[90%] overflow-auto">
+        <h1 class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-600 pt-[20px]">{modalText}</h1>
+
         <button className="modal-close w-10 rounded-md absolute top-0 right-6" onClick={onClose}>
           X
         </button>
