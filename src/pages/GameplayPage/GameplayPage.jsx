@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from "react";
-// import {setTimeout} ...
 import boardImage from "../../assets/gameboard.png";
 import userPic from "../../assets/userpic.svg";
 import alienImage from "../../assets/alienbob.png";
@@ -10,22 +9,9 @@ import Modal from "../../components/GamePlay/Modal/Modal";
 import Button from "../../components/Button/Button";
 import MusicPlayer from "../../components/MusicPlayer/MusicPlayer"; //music player component
 import { AuthContext } from "../../providers/AuthProvider";
+import { GameplayTimes } from "../../BigVariables/BigVariables";
 
 const gameplayFields = [116, 87, 200, 48, 212, 120, 205, 52, 165, 82, 223, 154]; // Playable fields
-const gameplayTimes = [
-  "Archean: You see a water world with a little bit land. There are microbial mats living here.",
-  "Phanerozoic: You see the first multicellular life forms in the gigantic oceans.",
-  "Paleozoic: You witness the cambrian explosion, you see fish, amphibians and reptiles.",
-  "Mesozoic: You are standing in a conifer forest surrounded by gigantic dinosaurs.",
-  "Paleolithic: It is cool and dry, must be some ice-age. There are people using tools, painting, hunting and talking. ",
-  "Neolithic: You see large forests, rivers and bottomlands. There are houses, people are farming and trade.",
-  "Iron Age: The production of smelted iron is everywhere. People living in cities, having temples and water pipes.",
-  "15th century: Banking and accounting are founded, the invention of the movable type begins the printing press.",
-  "17th century: Early modern period where big cities and kingdoms are. The microscope is invented.",
-  "1879: You are in Thomas Edisons lab in New Jersey. He just invented a incandescent light bulb.",
-  "1969: You are witness of the first time when people were leaving the earth to land on the moon - Explorers like you!",
-  "2007: You are visitor at the Macworld keynote where Steve Jobs introduces the iPhone, the first smartphone.",
-]; // Timeperiods will be shown in the display
 
 function GameplayPage({ onLogOut }) {
   const { user } = useContext(AuthContext);
@@ -123,7 +109,7 @@ function GameplayPage({ onLogOut }) {
             id="gameProgress"
             className="gameProgress h-38 w-[180px] mt-4 mb-0 p-1 bg-[#fefffa] rounded-md border-2 border-[#8168fe] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
           >
-            <p>{`You are in ${gameplayTimes[currentFieldIndex]}`}</p>
+            <p>{`You are in ${GameplayTimes[currentFieldIndex]}`}</p>
           </div>
           <div>
             <Button text="Next riddle" onClick={openModal} className="my-0" />
