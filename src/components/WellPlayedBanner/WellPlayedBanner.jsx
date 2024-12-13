@@ -4,7 +4,7 @@ import wellPlayedImage from '../../assets/wellplayedBanner.png';
   const WellPlayedBanner = () => {
     const [displayText, setDisplayText] = useState(""); 
     const fullText = "Well played! \nA new item is rewarded for your effort.";
-    const typingSpeed = 85;
+    const typingSpeed = 30;
   
     useEffect(() => {
       let charIndex = 0;
