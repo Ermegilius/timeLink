@@ -1,4 +1,5 @@
 - Archean Eon: stromatolites
+- proterozioc
 - Phanerozoic: Mollusca
 - Paleozoic: trilobites
 - Mesozoic: Dinosaurs
