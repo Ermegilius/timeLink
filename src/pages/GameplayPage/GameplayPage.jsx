@@ -97,30 +97,33 @@ useEffect(() => {
               <div className="boxForGameplay block h-full w-full">
                {showWellPlayedBanner ? (
                 <WellPlayedBanner />
-              ) : (
-                <div className="playboard h-80 w-full z-10 absolute opacity-100">
-                  {
-                    <img
-                      className="playboard-img"
-                      src={boardImage}
-                      alt="game playboard"
-                    />
-                  }
-                </div>
-                <div
-                  className="playboard-grid grid grid-cols-14 gap-0 h-full w-full z-20"
-                  id="playboard-grid"
-                >
-                  {[...Array(294)].map((_, index) => (
-                    <div
-                      key={index}
-                      id={index + 1}
-                      className="relative text-[0.7rem] text-transparent text-center max-w-[75px]"
-                    >
-                      {index + 1}
+                ) : (
+                  <>
+                    <div className="playboard h-80 w-full z-10 absolute opacity-100">
+                      {
+                        <img
+                          className="playboard-img"
+                          src={boardImage}
+                          alt="game playboard"
+                        />
+                      }
                     </div>
-                  ))}
-                </div>
+                    <div
+                      className="playboard-grid grid grid-cols-14 gap-0 h-full w-full z-20"
+                      id="playboard-grid"
+                    >
+                      {[...Array(294)].map((_, index) => (
+                        <div
+                          key={index}
+                          id={index + 1}
+                          className="relative text-[0.7rem] text-transparent text-center max-w-[75px]"
+                        >
+                          {index + 1}
+                        </div>
+                    ))}
+                    </div>
+                  </>
+                )}
               </div>
                    <div id="itemList" className="itemList flex flex-row flex-nowrap w-full bg-[#d9f9cf] border-t-2 border-[#8168fe] rounded-b-md">
             {icons.map((icon, index) => (
@@ -132,7 +135,7 @@ useEffect(() => {
                   className={`absolute inset-0 border-[6px] ${borderColors[index % borderColors.length]} flex justify-center items-center`}
                  >
                 <img src={icon} className="lockIcon w-[40px] mx-4" alt="icon" />
-              </div>
+                </div>
               </div>  
             ))}
           </div>
@@ -148,9 +151,7 @@ useEffect(() => {
                   id="userName"
                   className="text-[16px] bg-[#fefffa] w-[180px] py-0.5 rounded-b-md border-b-2 border-l-2 border-r-2 border-[#8168fe] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
                 >
-                  <div>
-                    {user ? user.displayName || user.email : "Guest Player"}
-                  </div>
+                  {user ? user.displayName || user.email : "Guest Player"}
                 </h3>
               </div>
               <div
@@ -160,7 +161,7 @@ useEffect(() => {
               <p>{`You are in ${GameplayTimes[currentFieldIndex]}`}</p>
             </div>
               <div>
-                <Button text={currentFieldIndex !== 2 ? "Next riddle" : "Finish game"} onClick={currentFieldIndex !==2 ?openModal : finishGame} className="my-0" />
+                <Button text={currentFieldIndex !== 11 ? "Next riddle" : "Finish game"} onClick={currentFieldIndex !==11 ?openModal : finishGame} className="my-0" />
                 <Modal
                   isOpen={isModalOpen}
                   onClose={closeModal}
@@ -174,7 +175,7 @@ useEffect(() => {
               </div>
             </aside>
           </div>
-      ))}
+      )}
     </main> 
   );
 }
