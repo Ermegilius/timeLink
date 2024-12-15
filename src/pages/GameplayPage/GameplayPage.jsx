@@ -40,11 +40,6 @@ function GameplayPage({ onLogOut }) {
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setShowWellPlayedBanner(true); // Show WellPlayedBanner when modal is closed
-    setTimeout(() => {
-      setShowWellPlayedBanner(false); // Hide after 5 seconds
-      handleMoveNext(); // Automatically move the avatar to the next grid
-    }, 4000);
   };
 
   // Initialize the avatar at the starting grid
@@ -66,6 +61,11 @@ function GameplayPage({ onLogOut }) {
   };
 
   const handleCorrectAnswer = () => {
+    setShowWellPlayedBanner(true); // Show WellPlayedBanner when modal is closed
+    setTimeout(() => {
+      setShowWellPlayedBanner(false); // Hide after 5 seconds
+      handleMoveNext(); // Automatically move the avatar to the next grid
+    }, 4000);
     setRewards((prevRewards) => [...prevRewards, "Reward"]); // Add a prize to rewards
     setIcons((prevIcons) => {
       const newIcons = [...prevIcons];
@@ -169,6 +169,7 @@ function GameplayPage({ onLogOut }) {
                 setRewards={setRewards}
                 handleCorrectAnswer={handleCorrectAnswer}
               />
+
             </div>
             <div className="musicBox w-[180px] h-32 p-1 bg-[#fefffa] rounded-md border-2 border-[#8168fe] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
               <MusicPlayer />
