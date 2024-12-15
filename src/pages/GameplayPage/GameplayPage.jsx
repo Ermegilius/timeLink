@@ -44,6 +44,7 @@ function GameplayPage({ onLogOut }) {
 
   // Initialize the avatar at the starting grid
   useEffect(() => {
+    loadStateFromLocalStorage();
     const startingFieldId = `${gameplayFields[0]}`; // Get the starting grid ID
     placeAlienOnGrid(startingFieldId, alienImage); // Place the alien on the grid
   }, []);
@@ -51,7 +52,8 @@ function GameplayPage({ onLogOut }) {
   useEffect(() => {
     const currentFieldId = `${gameplayFields[currentFieldIndex]}`;
     placeAlienOnGrid(currentFieldId, alienImage); // Ensure alien is placed on the correct field
-  }, [currentFieldIndex, showWellPlayedBanner]);
+    saveStateToLocalStorage(); // Save state whenever currentFieldIndex or rewards change
+  }, [currentFieldIndex, showWellPlayedBanner, rewards]);
 
   const handleMoveNext = () => {
     const nextIndex = (currentFieldIndex + 1) % gameplayFields.length;
@@ -86,6 +88,44 @@ function GameplayPage({ onLogOut }) {
       finishGame();
     }
   }, [currentFieldIndex]);
+
+  // Save state to local storage
+  const saveStateToLocalStorage = () => {
+    const state = {
+      currentFieldIndex,
+      rewards,
+    };
+    localStorage.setItem("gameState", JSON.stringify(state));
+  };
+
+  // Load state from local storage
+  const loadStateFromLocalStorage = () => {
+    const savedState = localStorage.getItem("gameState");
+    if (savedState) {
+      const { currentFieldIndex, rewards } = JSON.parse(savedState);
+      setCurrentFieldIndex(currentFieldIndex);
+      setRewards(rewards);
+      setIcons((prevIcons) => {
+        const newIcons = [...prevIcons];
+        rewards.forEach((_, index) => {
+          newIcons[index] = starIcon;
+        });
+        return newIcons;
+      });
+      const currentFieldId = `${gameplayFields[currentFieldIndex]}`;
+      placeAlienOnGrid(currentFieldId, alienImage); // Place the alien on the correct field
+    }
+  };
+
+  useEffect(() => {
+    loadStateFromLocalStorage();
+  }, []);
+
+  useEffect(() => {
+    const currentFieldId = `${gameplayFields[currentFieldIndex]}`;
+    placeAlienOnGrid(currentFieldId, alienImage); // Ensure alien is placed on the correct field
+    saveStateToLocalStorage(); // Save state whenever currentFieldIndex or rewards change
+  }, [currentFieldIndex, showWellPlayedBanner, rewards]);
 
   return (
     <main>
