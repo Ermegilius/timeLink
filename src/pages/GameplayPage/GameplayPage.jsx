@@ -26,7 +26,7 @@ function GameplayPage({ onLogOut }) {
   const [icons, setIcons] = useState(Array(10).fill(lockIcon)); // Initialize with default icons
   const [isModalOpen, setIsModalOpen] = useState(false); // modal is closed by default
   const [showWellPlayedBanner, setShowWellPlayedBanner] = useState(false); // State for WellPlayedBanner
-  const [isGameFinished, setIsGameFinished] = useState(true); // Track if the game is finished
+  const [isGameFinished, setIsGameFinished] = useState(false); // Track if the game is finished
   const openModal = () => setIsModalOpen(true);
 
   const closeModal = () => {
@@ -109,7 +109,7 @@ function GameplayPage({ onLogOut }) {
         <FinishedGameBanner />
         <div className="button-group flex flex-row gap-4">
           <button
-          className="play-again-btn h-14 w-52 p-1.5 text-[26px] transition absolute top-[550px] left-[720px] z-30"
+          className="play-again-btn h-14 w-52 p-1.5 text-[26px] absolute top-[550px] left-[720px] z-30"
           onClick={() => {
             setCurrentFieldIndex(0);
             setGameStarted(false);
@@ -122,7 +122,7 @@ function GameplayPage({ onLogOut }) {
           </button>
           <Link to="/">
           <button
-          className="exit-btn h-14 w-52 p-1.5 text-[26px] transition absolute top-[550px] left-[980px] z-30"
+          className="exit-btn h-14 w-52 p-1.5 text-[26px] absolute top-[550px] left-[980px] z-30"
           >
             Exit
           </button>
