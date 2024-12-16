@@ -9,27 +9,33 @@ const Modal = ({ isOpen, onClose, handleCorrectAnswer }) => {
 
   useEffect(() => {
     if (isOpen) {
-      fetchRiddle();
+      fetchRiddleAndAnswers();
     }
   }, [isOpen]);
 
-  const fetchRiddle = async () => {
+  const fetchRiddleAndAnswers = async () => {
     try {
-      const response = await fetch("https://riddles-api.vercel.app/random");
-      const data = await response.json();
-      console.log("Fetched Riddle:", data); // Debugging the response
+      // Fetch the riddle
+      const riddleResponse = await fetch(
+        "https://riddles-api.vercel.app/random"
+      );
+      const riddleData = await riddleResponse.json();
+      console.log("Fetched Riddle:", riddleData);
 
-      const incorrectAnswers = [
-        "Some answer",
-        "Another answer",
-        "One more answer",
-      ]; //answers for debugging
-      const allAnswers = shuffleArray([data.answer, ...incorrectAnswers]);
+      // Fetch incorrect answers
+      const wordsResponse = await fetch(
+        "https://random-word-api.herokuapp.com/word?number=3"
+      );
+      const wordsData = await wordsResponse.json();
+      console.log("Fetched Incorrect Answers:", wordsData);
 
-      setRiddle(data); // Set the full API response
+      // Combine correct and incorrect answers, then shuffle
+      const allAnswers = shuffleArray([riddleData.answer, ...wordsData]);
+
+      setRiddle(riddleData); // Set the fetched riddle
       setAnswers(allAnswers); // Set the answers array
     } catch (error) {
-      console.error("Failed to fetch riddle:", error);
+      console.error("Failed to fetch riddle or answers:", error);
       setRiddle({
         riddle: "Error fetching riddle. Please try again later.",
         answer: "",
@@ -40,14 +46,14 @@ const Modal = ({ isOpen, onClose, handleCorrectAnswer }) => {
 
   const handleAnswerSubmit = (selectedAnswer) => {
     if (
-      selectedAnswer.trim().toLowerCase() === // need that trim & lowercase when we have to type the answer
+      selectedAnswer.trim().toLowerCase() ===
       riddle?.answer?.trim().toLowerCase()
     ) {
       setModalText("Correct! You earned a reward.");
       setBgColor("bg-green-500");
       setTimeout(() => {
         onClose(); // Close the modal
-        setModalText(""); // resets the text after timeout
+        setModalText("");
       }, 1800);
       handleCorrectAnswer(); // Call the correct answer handler
     } else {
@@ -55,24 +61,35 @@ const Modal = ({ isOpen, onClose, handleCorrectAnswer }) => {
       setBgColor("bg-red-500");
     }
     setTimeout(() => {
-      setBgColor(""); // sets it back after 0.9 sec
+      setBgColor("");
       setModalText("");
     }, 900);
   };
 
   if (!isOpen) return null;
-  return (
-    <div className={`modal-overlay fixed inset-0 bg-[#0f0831] bg-opacity-50 flex justify-center items-center z-50 ${bgColor}`}>
-      <div className="modal-content bg-[#fefffa] p-6 rounded-lg relative w-4/5 max-w-xl max-h-[90%] overflow-auto">
-        <h1 class={`text-2xl text-transparent bg-clip-text ${modalText === "Correct! You earned a reward."
-            ? "bg-gradient-to-r from-sky-400 to-emerald-600"
-            : "bg-gradient-to-r from-pink-500 to-red-500"
-          } pt-[20px]`}>{modalText}</h1>
 
-        <button className="modal-close w-10 rounded-md absolute top-0 right-6" onClick={onClose}>
+  return (
+    <div
+      className={`modal-overlay fixed inset-0 bg-[#0f0831] bg-opacity-50 flex justify-center items-center z-50 ${bgColor}`}
+    >
+      <div className="modal-content bg-[#fefffa] p-6 rounded-lg relative w-4/5 max-w-xl max-h-[90%] overflow-auto">
+        <h1
+          className={`text-2xl text-transparent bg-clip-text ${
+            modalText === "Correct! You earned a reward."
+              ? "bg-gradient-to-r from-sky-400 to-emerald-600"
+              : "bg-gradient-to-r from-pink-500 to-red-500"
+          } pt-[20px]`}
+        >
+          {modalText}
+        </h1>
+
+        <button
+          className="modal-close w-10 rounded-md absolute top-0 right-6"
+          onClick={onClose}
+        >
           X
         </button>
-        <div className="iddle-section mt-12">
+        <div className="riddle-section mt-12">
           {riddle ? (
             <>
               <ShowRiddle riddle={riddle} />
@@ -83,7 +100,6 @@ const Modal = ({ isOpen, onClose, handleCorrectAnswer }) => {
                     key={index}
                     onClick={() => handleAnswerSubmit(answer)}
                   >
-                    {" "}
                     {answer}
                   </button>
                 ))}
