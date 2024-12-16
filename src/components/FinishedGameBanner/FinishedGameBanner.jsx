@@ -5,7 +5,7 @@ import beamBobImage from '../../assets/beambob.png';
 
   const FinishedGameBanner = () => {
     const [displayText, setDisplayText] = useState(""); 
-    const fullText = "That was the last item, you found them all and helped me through your planet's fascinating history! Now I will return to my faraway home to share my findings. Thank you again, and let's meet again in the future!";
+    const fullText = "That was the last item, you found them all and helped me through your planet's exciting history! Now I will return to my faraway home to share my findings. Thank you once more, and let's meet again in the future!";
     const typingSpeed = 65;
   
     useEffect(() => {
