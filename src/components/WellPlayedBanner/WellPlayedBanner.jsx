@@ -20,7 +20,7 @@ import wellPlayedImage from '../../assets/wellplayedBanner.png';
   
   return (
     <div className="wellplayed-banner">
-        <img className="wellplayed-img block h-[68.6vh] w-full z-10 relative" src={wellPlayedImage} alt="alien showing thumbs up" />
+        <img className="wellplayed-img block w-full h-[466px] z-10 relative" src={wellPlayedImage} alt="alien showing thumbs up" />
         <div className="typewriter-text absolute top-[22%] left-[66%] transform -translate-x-1/2 whitespace-normal text-left w-[27%] leading-[1.5] font-typewriter text-[30px] z-30">
             {displayText.split("\n").map((line, index) => (
             <React.Fragment key={index}>

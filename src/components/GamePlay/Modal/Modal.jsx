@@ -43,7 +43,7 @@ const Modal = ({ isOpen, onClose, handleCorrectAnswer }) => {
       selectedAnswer.trim().toLowerCase() === // need that trim & lowercase when we have to type the answer
       riddle?.answer?.trim().toLowerCase()
     ) {
-      setModalText("Correct! You earned a reward.");
+      setModalText("Correct answer!");
       setBgColor("bg-green-500");
       setTimeout(() => {
         onClose(); // Close the modal
@@ -51,7 +51,7 @@ const Modal = ({ isOpen, onClose, handleCorrectAnswer }) => {
       }, 1800);
       handleCorrectAnswer(); // Call the correct answer handler
     } else {
-      setModalText("Incorrect answer. Try again.");
+      setModalText("Incorrect answer, try again!");
       setBgColor("bg-red-500");
     }
     setTimeout(() => {
@@ -64,7 +64,7 @@ const Modal = ({ isOpen, onClose, handleCorrectAnswer }) => {
   return (
     <div className={`modal-overlay fixed inset-0 bg-[#0f0831] bg-opacity-50 flex justify-center items-center z-50 ${bgColor}`}>
       <div className="modal-content bg-[#fefffa] p-6 rounded-lg relative w-4/5 max-w-xl max-h-[90%] overflow-auto">
-        <h1 class={`text-2xl text-transparent bg-clip-text ${modalText === "Correct! You earned a reward."
+        <h1 class={`text-2xl text-transparent bg-clip-text ${modalText === "Correct answer!"
             ? "bg-gradient-to-r from-sky-400 to-emerald-600"
             : "bg-gradient-to-r from-pink-500 to-red-500"
           } pt-[20px]`}>{modalText}</h1>
@@ -72,7 +72,7 @@ const Modal = ({ isOpen, onClose, handleCorrectAnswer }) => {
         <button className="modal-close w-10 rounded-md absolute top-0 right-6" onClick={onClose}>
           X
         </button>
-        <div className="iddle-section mt-12">
+        <div className="riddle-section mt-12">
           {riddle ? (
             <>
               <ShowRiddle riddle={riddle} />

@@ -92,9 +92,9 @@ function GameplayPage({ onLogOut }) {
       {isGameFinished ? (
         <FinishedGameBanner />
       ) : (
-        <div className="boxForGameplayAndMenu flex flex-row flex-nowrap gap-12 w-full h-[79.8vh]">
+        <div className="boxForGameplayAndMenu flex flex-row flex-nowrap gap-12 w-full h-[541px] max-h-[541px]">
           <div className="boxForGameplayAndItems flex flex-col flex-nowrap w-full h-full relative z-20 border-2 border-[#8168fe] rounded-md shadow-[0_4px_4px_rgba(0,0,0,0.25),0_3px_6px_rgba(0,0,0,0.22)]">
-            <div className="boxForGameplay block h-full w-full">
+            <div className="boxForGameplay block w-full h-[541px] max-h-[541px]">
               {showWellPlayedBanner ? (
                 <WellPlayedBanner />
               ) : (
@@ -161,7 +161,7 @@ function GameplayPage({ onLogOut }) {
               <p>{`You are in ${GameplayTimes[currentFieldIndex]}`}</p>
             </div>
             <div>
-              <Button text={currentFieldIndex === 0 ? "Start riddles" : currentFieldIndex !== 11 ? "Next riddle" : "Finish game"} onClick={currentFieldIndex !== 11 ? openModal : finishGame} className="my-0" />
+              <Button text={currentFieldIndex === 0 ? "Start game" : currentFieldIndex !== 11 ? "Next riddle" : "Finish game"} onClick={currentFieldIndex !== 11 ? openModal : finishGame} className="my-0" />
               <Modal
                 isOpen={isModalOpen}
                 onClose={closeModal}
