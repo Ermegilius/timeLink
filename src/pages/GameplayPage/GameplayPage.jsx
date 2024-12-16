@@ -23,82 +23,79 @@ function GameplayPage({ onLogOut }) {
   const [currentFieldIndex, setCurrentFieldIndex] = useState(0);
   const [gameStarted, setGameStarted] = useState(false);
   const [rewards, setRewards] = useState([]);
-  const [icons, setIcons] = useState(Array(10).fill(lockIcon)); 
+  const [icons, setIcons] = useState(Array(10).fill(lockIcon));
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showWellPlayedBanner, setShowWellPlayedBanner] = useState(false);
-  const [isGameFinished, setIsGameFinished] = useState(false); 
+  const [isGameFinished, setIsGameFinished] = useState(false);
+  const [flashIndex, setFlashIndex] = useState(null); // New state for flashing item
+
   const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  // Initialize the avatar at the starting grid
   useEffect(() => {
-    const startingFieldId = `${gameplayFields[0]}`; // Get the starting grid ID
-    placeAlienOnGrid(startingFieldId, alienImage); // Place the alien on the grid
+    const startingFieldId = `${gameplayFields[0]}`;
+    placeAlienOnGrid(startingFieldId, alienImage);
   }, []);
 
   useEffect(() => {
     const currentFieldId = `${gameplayFields[currentFieldIndex]}`;
-    placeAlienOnGrid(currentFieldId, alienImage); // Ensure alien is placed on the correct field
+    placeAlienOnGrid(currentFieldId, alienImage);
   }, [currentFieldIndex, showWellPlayedBanner]);
 
   const handleStartGame = () => {
-    setGameStarted(true); // Mark the game as started
-    setCurrentFieldIndex(1); // Move to grid place 87
+    setGameStarted(true);
+    setCurrentFieldIndex(1);
   };
 
   const handleMoveNext = () => {
     const nextIndex = (currentFieldIndex + 1) % gameplayFields.length;
     const nextFieldId = `${gameplayFields[nextIndex]}`;
-    placeAlienOnGrid(nextFieldId, alienImage); // Move the alien to the next grid
+    placeAlienOnGrid(nextFieldId, alienImage);
     setCurrentFieldIndex(nextIndex);
   };
 
   const handleCorrectAnswer = () => {
-    // Delay the appearance of the WellPlayedBanner by 1800ms
-    setTimeout(() => {
-      setShowWellPlayedBanner(true);
-    }, 1800);
-  
-    // Delay reward addition by 2 seconds (consistent with the banner delay)
+    setTimeout(() => setShowWellPlayedBanner(true), 1800);
+
     setTimeout(() => {
       setRewards((prevRewards) => {
         const updatedRewards = [...prevRewards, "Reward"];
+        const rewardIndex = updatedRewards.length - 1;
+
         setIcons((prevIcons) => {
           const newIcons = [...prevIcons];
-          const rewardIndex = updatedRewards.length - 1; // Current reward index
           if (rewardIndex < GameplayItems.length) {
-            newIcons[rewardIndex] = GameplayItems[rewardIndex]; // Directly assign the image path
+            newIcons[rewardIndex] = GameplayItems[rewardIndex];
           }
           return newIcons;
         });
+
+        // Trigger flash for the new item
+        setFlashIndex(rewardIndex);
+
+        // Remove flash class after animation completes
+        setTimeout(() => setFlashIndex(null), 2000); // Matches animation duration
         return updatedRewards;
       });
-  
-      // Hide WellPlayedBanner after 3 seconds from its appearance
+
       setTimeout(() => {
         setShowWellPlayedBanner(false);
-        handleMoveNext(); // Move to the next field
+        handleMoveNext();
       }, 1500);
-    }, 3000); // Delay rewards by 2 seconds
+    }, 3000);
   };
-    
-  // Function to finish the game
+
   const finishGame = () => {
     setIsGameFinished(true);
   };
-  
-  // Manage FinishedGameBanner with delay after reaching the last field
+
   useEffect(() => {
     if (currentFieldIndex === gameplayFields.length - 1) {
-      // Ensure the FinishedGameBanner only shows after the WellPlayedBanner
       const timer = setTimeout(() => {
         finishGame();
-      }, showWellPlayedBanner ? 6000 : 4000); // Adjust delay if WellPlayedBanner is active
-  
-      return () => clearTimeout(timer); // Cleanup
+      }, showWellPlayedBanner ? 6000 : 4000);
+
+      return () => clearTimeout(timer);
     }
   }, [currentFieldIndex, showWellPlayedBanner]);
 
@@ -167,14 +164,16 @@ function GameplayPage({ onLogOut }) {
               {icons.map((icon, index) => (
                 <div
                   key={index}
-                  className="item flex justify-center items-center bg-[#fefffa] h-[70px] w-[10%] p-2 border-l border-r border-[#8168fe] relative"
+                  className={`item flex justify-center items-center bg-[#fefffa] h-[70px] w-[10%] p-2 border-l border-r border-[#8168fe] relative ${
+                    flashIndex === index ? "animate-flash" : ""
+                  }`}
                 >
                   <div
                     className={`absolute inset-0 border-[6px] ${BorderColors[index % BorderColors.length]} flex justify-center items-center`}
                   >
                      <img
                         src={icon}
-                        className={`${icon === lockIcon ? "w-[40px]" : "max-h-[45px] max-w-[65px]"} mx-4`}
+                        className={`${icon === lockIcon ? "w-[40px]" : "max-h-[40px] max-w-[65px]"} mx-4`}
                         alt="icon"
                       />
                     </div>
@@ -201,7 +200,7 @@ function GameplayPage({ onLogOut }) {
               className="gameProgress text-[14px] leading-4 text-center h-[160px] w-[180px] mt-4 mb-0 p-[0.5rem] bg-[#fefffa] rounded-md border-2 border-[#8168fe] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
             >
               <p>You are in</p>
-              <p className="text-[16px] leading-6 text-[#ff7272]">{GameplayTimeTitles[currentFieldIndex]}</p>
+              <p className="text-[16px] leading-6 text-[#1e83ff]">{GameplayTimeTitles[currentFieldIndex]}</p>
               <p>{GameplayTimes[currentFieldIndex]}</p>
             </div>
             <div>

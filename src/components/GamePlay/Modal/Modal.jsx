@@ -44,7 +44,7 @@ const Modal = ({ isOpen, onClose, handleCorrectAnswer }) => {
       riddle?.answer?.trim().toLowerCase()
     ) {
       setModalText("Correct answer!");
-      setBgColor("bg-green-500");
+      setBgColor("bg-emerald-500");
       setTimeout(() => {
         onClose(); // Close the modal
         setModalText(""); // resets the text after timeout
@@ -52,7 +52,7 @@ const Modal = ({ isOpen, onClose, handleCorrectAnswer }) => {
       handleCorrectAnswer(); // Call the correct answer handler
     } else {
       setModalText("Incorrect answer, try again!");
-      setBgColor("bg-red-500");
+      setBgColor("bg-rose-500");
     }
     setTimeout(() => {
       setBgColor(""); // sets it back after 0.9 sec
@@ -64,9 +64,9 @@ const Modal = ({ isOpen, onClose, handleCorrectAnswer }) => {
   return (
     <div className={`modal-overlay fixed inset-0 bg-[#0f0831] bg-opacity-50 flex justify-center items-center z-50 ${bgColor}`}>
       <div className="modal-content bg-[#fefffa] p-6 rounded-lg relative w-4/5 max-w-xl max-h-[90%] overflow-auto">
-        <h1 class={`text-2xl text-transparent bg-clip-text ${modalText === "Correct answer!"
-            ? "bg-gradient-to-r from-sky-400 to-emerald-600"
-            : "bg-gradient-to-r from-pink-500 to-red-500"
+        <h1 className={`text-2xl text-transparent bg-clip-text ${modalText === "Correct answer!"
+            ? "bg-gradient-to-r from-green-500 to-blue-500"
+            : "bg-gradient-to-r from-red-400 to-fuchsia-400"
           } pt-[20px]`}>{modalText}</h1>
 
         <button className="modal-close w-10 rounded-md absolute top-0 right-6" onClick={onClose}>
