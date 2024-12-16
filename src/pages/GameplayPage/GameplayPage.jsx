@@ -21,12 +21,12 @@ const gameplayFields = [116, 87, 200, 48, 212, 120, 205, 52, 165, 82, 223, 154];
 function GameplayPage({ onLogOut }) {
   const { user } = useContext(AuthContext);
   const [currentFieldIndex, setCurrentFieldIndex] = useState(0);
-  const [gameStarted, setGameStarted] = useState(false); // Tr
+  const [gameStarted, setGameStarted] = useState(false);
   const [rewards, setRewards] = useState([]);
-  const [icons, setIcons] = useState(Array(10).fill(lockIcon)); // Initialize with default icons
-  const [isModalOpen, setIsModalOpen] = useState(false); // modal is closed by default
-  const [showWellPlayedBanner, setShowWellPlayedBanner] = useState(false); // State for WellPlayedBanner
-  const [isGameFinished, setIsGameFinished] = useState(true); // Track if the game is finished
+  const [icons, setIcons] = useState(Array(10).fill(lockIcon)); 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showWellPlayedBanner, setShowWellPlayedBanner] = useState(false);
+  const [isGameFinished, setIsGameFinished] = useState(false); 
   const openModal = () => setIsModalOpen(true);
 
   const closeModal = () => {
