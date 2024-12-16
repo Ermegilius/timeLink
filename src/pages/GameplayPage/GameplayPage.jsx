@@ -9,7 +9,9 @@ import Modal from "../../components/GamePlay/Modal/Modal";
 import Button from "../../components/Button/Button";
 import MusicPlayer from "../../components/MusicPlayer/MusicPlayer";
 import { AuthContext } from "../../providers/AuthProvider";
+import { GameplayItems } from "../../BigVariables/BigVariables";
 import { GameplayTimes } from "../../BigVariables/BigVariables";
+import { GameplayTimeTitles } from "../../BigVariables/BigVariables";
 import { BorderColors } from "../../BigVariables/BigVariables";
 import FinishedGameBanner from "../../components/FinishedGameBanner/FinishedGameBanner";
 import WellPlayedBanner from "../../components/WellPlayedBanner/WellPlayedBanner";
@@ -19,6 +21,7 @@ const gameplayFields = [116, 87, 200, 48, 212, 120, 205, 52, 165, 82, 223, 154];
 function GameplayPage({ onLogOut }) {
   const { user } = useContext(AuthContext);
   const [currentFieldIndex, setCurrentFieldIndex] = useState(0);
+  const [gameStarted, setGameStarted] = useState(false); // Tr
   const [rewards, setRewards] = useState([]);
   const [icons, setIcons] = useState(Array(10).fill(lockIcon)); // Initialize with default icons
   const [isModalOpen, setIsModalOpen] = useState(false); // modal is closed by default
@@ -41,6 +44,11 @@ function GameplayPage({ onLogOut }) {
     placeAlienOnGrid(currentFieldId, alienImage); // Ensure alien is placed on the correct field
   }, [currentFieldIndex, showWellPlayedBanner]);
 
+  const handleStartGame = () => {
+    setGameStarted(true); // Mark the game as started
+    setCurrentFieldIndex(1); // Move to grid place 87
+  };
+
   const handleMoveNext = () => {
     const nextIndex = (currentFieldIndex + 1) % gameplayFields.length;
     const nextFieldId = `${gameplayFields[nextIndex]}`;
@@ -49,31 +57,50 @@ function GameplayPage({ onLogOut }) {
   };
 
   const handleCorrectAnswer = () => {
-    setShowWellPlayedBanner(true); // Show WellPlayedBanner when modal is closed
+    // Delay the appearance of the WellPlayedBanner by 1800ms
     setTimeout(() => {
-      setShowWellPlayedBanner(false); // Hide after 5 seconds
-      handleMoveNext(); // Automatically move the avatar to the next grid
-    }, 4000);
-    setRewards((prevRewards) => [...prevRewards, "Reward"]); // Add a prize to rewards
-    setIcons((prevIcons) => {
-      const newIcons = [...prevIcons];
-      newIcons[rewards.length] = starIcon; // Update the icon for the current reward (to star now)
-      return newIcons;
-    });
+      setShowWellPlayedBanner(true);
+    }, 1800);
+  
+    // Delay reward addition by 2 seconds (consistent with the banner delay)
+    setTimeout(() => {
+      setRewards((prevRewards) => {
+        const updatedRewards = [...prevRewards, "Reward"];
+        setIcons((prevIcons) => {
+          const newIcons = [...prevIcons];
+          const rewardIndex = updatedRewards.length - 1; // Current reward index
+          if (rewardIndex < GameplayItems.length) {
+            newIcons[rewardIndex] = GameplayItems[rewardIndex]; // Directly assign the image path
+          }
+          return newIcons;
+        });
+        return updatedRewards;
+      });
+  
+      // Hide WellPlayedBanner after 3 seconds from its appearance
+      setTimeout(() => {
+        setShowWellPlayedBanner(false);
+        handleMoveNext(); // Move to the next field
+      }, 1500);
+    }, 3000); // Delay rewards by 2 seconds
   };
-  const allRewardsCollected = rewards.length === gameplayFields.length; // Check if all rewards are collected
-
+    
   // Function to finish the game
   const finishGame = () => {
     setIsGameFinished(true);
   };
-
-  // Call finishGame when the game is finished
+  
+  // Manage FinishedGameBanner with delay after reaching the last field
   useEffect(() => {
     if (currentFieldIndex === gameplayFields.length - 1) {
-      finishGame();
+      // Ensure the FinishedGameBanner only shows after the WellPlayedBanner
+      const timer = setTimeout(() => {
+        finishGame();
+      }, showWellPlayedBanner ? 6000 : 4000); // Adjust delay if WellPlayedBanner is active
+  
+      return () => clearTimeout(timer); // Cleanup
     }
-  }, [currentFieldIndex]);
+  }, [currentFieldIndex, showWellPlayedBanner]);
 
   return (
     <main>
@@ -122,8 +149,12 @@ function GameplayPage({ onLogOut }) {
                   <div
                     className={`absolute inset-0 border-[6px] ${BorderColors[index % BorderColors.length]} flex justify-center items-center`}
                   >
-                    <img src={icon} className="lockIcon w-[40px] mx-4" alt="icon" />
-                  </div>
+                     <img
+                        src={icon}
+                        className={`${icon === lockIcon ? "w-[40px]" : "max-h-[45px] max-w-[65px]"} mx-4`}
+                        alt="icon"
+                      />
+                    </div>
                 </div>
               ))}
             </div>
@@ -144,12 +175,18 @@ function GameplayPage({ onLogOut }) {
             </div>
             <div
               id="gameProgress"
-              className="gameProgress h-38 w-[180px] mt-4 mb-0 p-1 bg-[#fefffa] rounded-md border-2 border-[#8168fe] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
+              className="gameProgress text-[14px] leading-4 text-center h-[160px] w-[180px] mt-4 mb-0 p-[0.5rem] bg-[#fefffa] rounded-md border-2 border-[#8168fe] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
             >
-              <p>{`You are in ${GameplayTimes[currentFieldIndex]}`}</p>
+              <p>You are in</p>
+              <p className="text-[16px] leading-6 text-[#ff7272]">{GameplayTimeTitles[currentFieldIndex]}</p>
+              <p>{GameplayTimes[currentFieldIndex]}</p>
             </div>
             <div>
-              <Button text={currentFieldIndex === 0 ? "Start game" : currentFieldIndex !== 11 ? "Next riddle" : "Finish game"} onClick={currentFieldIndex !== 11 ? openModal : finishGame} className="my-0" />
+            <Button
+                text={!gameStarted ? "Start game" : currentFieldIndex !== 11 ? "Next riddle" : "Finish game"}
+                onClick={!gameStarted ? handleStartGame : currentFieldIndex !== 11 ? openModal : finishGame}
+                className="my-0"
+              />
               <Modal
                 isOpen={isModalOpen}
                 onClose={closeModal}
@@ -159,7 +196,7 @@ function GameplayPage({ onLogOut }) {
               />
 
             </div>
-            <div className="musicBox w-[180px] h-32 p-1 bg-[#fefffa] rounded-md border-2 border-[#8168fe] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
+            <div className="musicBox w-[180px] h-32">
               <MusicPlayer />
             </div>
           </aside>
