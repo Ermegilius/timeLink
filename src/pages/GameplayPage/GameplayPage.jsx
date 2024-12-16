@@ -26,7 +26,7 @@ function GameplayPage({ onLogOut }) {
   const [icons, setIcons] = useState(Array(10).fill(lockIcon)); // Initialize with default icons
   const [isModalOpen, setIsModalOpen] = useState(false); // modal is closed by default
   const [showWellPlayedBanner, setShowWellPlayedBanner] = useState(false); // State for WellPlayedBanner
-  const [isGameFinished, setIsGameFinished] = useState(false); // Track if the game is finished
+  const [isGameFinished, setIsGameFinished] = useState(true); // Track if the game is finished
   const openModal = () => setIsModalOpen(true);
 
   const closeModal = () => {
