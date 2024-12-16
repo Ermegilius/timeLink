@@ -7,12 +7,12 @@ import starIcon from "../../assets/icons8-star-96.png";
 import placeAlienOnGrid from "../../utilities/placeAlienOnGrid";
 import Modal from "../../components/GamePlay/Modal/Modal";
 import Button from "../../components/Button/Button";
-
-import MusicPlayer from "../../components/MusicPlayer/MusicPlayer"; //music player component
+import MusicPlayer from "../../components/MusicPlayer/MusicPlayer";
 import { AuthContext } from "../../providers/AuthProvider";
 import { GameplayTimes } from "../../BigVariables/BigVariables";
+import { BorderColors } from "../../BigVariables/BigVariables";
 import FinishedGameBanner from "../../components/FinishedGameBanner/FinishedGameBanner";
-import WellPlayedBanner from "../../components/WellPlayedBanner/WellPlayedBanner"; // Import WellPlayedBanner
+import WellPlayedBanner from "../../components/WellPlayedBanner/WellPlayedBanner";
 
 const gameplayFields = [116, 87, 200, 48, 212, 120, 205, 52, 165, 82, 223, 154]; // Playable fields
 
@@ -21,18 +21,6 @@ function GameplayPage({ onLogOut }) {
   const [currentFieldIndex, setCurrentFieldIndex] = useState(0);
   const [rewards, setRewards] = useState([]);
   const [icons, setIcons] = useState(Array(10).fill(lockIcon)); // Initialize with default icons
-  const borderColors = [
-    "border-[#FFFFBB]",
-    "border-[#FFDDBB]",
-    "border-[#FFBBBB]",
-    "border-[#FFBBDD]",
-    "border-[#FFBBFF]",
-    "border-[#DDBBFF]",
-    "border-[#BBDDFF]",
-    "border-[#BBFFFF]",
-    "border-[#BBFFDD]",
-    "border-[#BBFFBB]",
-  ];
   const [isModalOpen, setIsModalOpen] = useState(false); // modal is closed by default
   const [showWellPlayedBanner, setShowWellPlayedBanner] = useState(false); // State for WellPlayedBanner
   const [isGameFinished, setIsGameFinished] = useState(false); // Track if the game is finished
@@ -132,7 +120,7 @@ function GameplayPage({ onLogOut }) {
                   className="item flex justify-center items-center bg-[#fefffa] h-[70px] w-[10%] p-2 border-l border-r border-[#8168fe] relative"
                 >
                   <div
-                    className={`absolute inset-0 border-[6px] ${borderColors[index % borderColors.length]} flex justify-center items-center`}
+                    className={`absolute inset-0 border-[6px] ${BorderColors[index % BorderColors.length]} flex justify-center items-center`}
                   >
                     <img src={icon} className="lockIcon w-[40px] mx-4" alt="icon" />
                   </div>

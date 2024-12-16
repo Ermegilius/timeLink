@@ -15,3 +15,18 @@ const GameplayTimes = [
 ];
 
 export { GameplayTimes };
+
+const BorderColors = [
+    "border-[#FFFFBB]",
+    "border-[#FFDDBB]",
+    "border-[#FFBBBB]",
+    "border-[#FFBBDD]",
+    "border-[#FFBBFF]",
+    "border-[#DDBBFF]",
+    "border-[#BBDDFF]",
+    "border-[#BBFFFF]",
+    "border-[#BBFFDD]",
+    "border-[#BBFFBB]",
+  ];
+
+  export { BorderColors };
