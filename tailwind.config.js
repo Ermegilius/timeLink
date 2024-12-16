@@ -26,7 +26,7 @@ export default {
         },
       },
       animation: {
-        'flicker-fadeout': 'flicker-fadeout 2s steps(10, step-end) 16s forwards',
+        'flicker-fadeout': 'flicker-fadeout 2s steps(10, end) 16s forwards',
         'move-up-slide-out': 'move-up-slide-out 3s ease-in-out 16.3s forwards, slide-out 1s ease-out 16.5s forwards',
         'flash': 'flash 0.25s step-start 2',
       },
