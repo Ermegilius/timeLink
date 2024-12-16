@@ -185,7 +185,7 @@ function GameplayPage({ onLogOut }) {
             <div id="user" className="user flex flex-col items-center">
               <img
                 src={userPic}
-                className="align-self-end w-[180px] max-h-[80px] pt-2 pr-4 pl-2 bg-[#fefffa] rounded-t-md border-b-[1px] border-l-2 border-r-2 border-t-2 border-[#8168fe]"
+                className="align-self-end bg-[#cde4ff] w-[180px] max-h-[80px] pt-2 pr-4 pl-2 rounded-t-md border-b-[1px] border-l-2 border-r-2 border-t-2 border-[#8168fe]"
                 alt="little Alien"
               />
               <h3
