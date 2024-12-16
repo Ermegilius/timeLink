@@ -26,7 +26,7 @@ function GameplayPage({ onLogOut }) {
   const [icons, setIcons] = useState(Array(10).fill(lockIcon));
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showWellPlayedBanner, setShowWellPlayedBanner] = useState(false);
-  const [isGameFinished, setIsGameFinished] = useState(true);
+  const [isGameFinished, setIsGameFinished] = useState(false);
   const [flashIndex, setFlashIndex] = useState(null); // New state for flashing item
 
   const openModal = () => setIsModalOpen(true);
