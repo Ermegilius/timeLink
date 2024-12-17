@@ -179,6 +179,6 @@ function GameplayPage({ onLogOut }) {
       )}
     </main>
   );
-}
+}// End of GameplayPage
 
 export default GameplayPage;
