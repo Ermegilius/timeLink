@@ -96,8 +96,8 @@ function GameplayPage({ onLogOut }) {
       rewards,
     };
     localStorage.setItem("gameState", JSON.stringify(state));
-  };
-
+    };
+    
   // Load state from local storage
   const loadStateFromLocalStorage = () => {
     const savedState = localStorage.getItem("gameState");
@@ -116,11 +116,11 @@ function GameplayPage({ onLogOut }) {
       placeAlienOnGrid(currentFieldId, alienImage); // Place the alien on the correct field
     }
   };
-
+  
   useEffect(() => {
     loadStateFromLocalStorage();
   }, []);
-
+  
   useEffect(() => {
     const currentFieldId = `${gameplayFields[currentFieldIndex]}`;
     placeAlienOnGrid(currentFieldId, alienImage); // Ensure alien is placed on the correct field
