@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import goodbyeImage from '../../assets/goodbyeBanner.png';
 
-  const GoodbyeBanner = () => {
+  const GoodbyeBanner = ({ isVisible }) => {
+      if (!isVisible) return null;
+
     const [displayText, setDisplayText] = useState(""); 
     const fullText = "Thank you for playing, \nsee you next time!";
     const typingSpeed = 85;

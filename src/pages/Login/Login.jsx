@@ -73,9 +73,9 @@ const Login = () => {
   };
 
   return (
-    <div className="hero h-screen bg-[#d4f9cf]">
-      <div className="hero-content flex-col lg:flex-row-reverse">
-        <div className="card bg-base-100 w-[350px] h-[604px] shrink-0 shadow-2xl">
+    <div className="h-screen max-h-[640px] bg-[#d4f9cf]">
+      <div className="hero-content p-[2rem] flex-col lg:flex-row-reverse">
+        <div className="card bg-base-100 w-[350px] max-h-[400px] shrink-0 shadow-2xl">
           <form
             onSubmit={handleLogin}
             className="card-body bg-[#BBBBFF] border-2 border-[#8168fe] rounded-md shadow-[0_4px_4px_rgba(0,0,0,0.25),0_3px_6px_rgba(0,0,0,0.22)]"
