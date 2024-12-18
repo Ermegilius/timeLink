@@ -26,6 +26,8 @@ const GameplayItems = [
 
 export { GameplayItems };
 
+
+
 const GameplayTimes = [
     "You have arrived here at the origin of the Earth, 4.6 billion years ago.",
     "You see a water world with just a little bit of land. Only microbial and bacterial life exists here.",
@@ -71,6 +73,6 @@ const BorderColors = [
     "border-[#BBFFFF]",
     "border-[#BBFFDD]",
     "border-[#BBFFBB]",
-  ];
+];
 
-  export { BorderColors };
+export { BorderColors };
