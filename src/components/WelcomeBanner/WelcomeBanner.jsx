@@ -33,8 +33,8 @@ const WelcomeBanner = () => {
   }, []);
 
   return (
-    <div className="welcomeBanner h-[541px] max-h-[541px] min-h-[541px] border-2 border-[#8168fe] rounded-md shadow-[0_4px_4px_rgba(0,0,0,0.25),0_3px_6px_rgba(0,0,0,0.22)]">
-        {<img className="welcome-img block h-[541px] max-h-[541px] min-h-[541px] w-full z-10 relative" src={welcomeImage} alt="alien welcoming to game" />}
+    <div className="welcomeBanner h-[542px] max-h-[542px] min-h-[542px] w-[1314px] border-2 border-[#8168fe] rounded-md shadow-[0_4px_4px_rgba(0,0,0,0.25),0_3px_6px_rgba(0,0,0,0.22)]">
+        {<img className="welcome-img block h-[538px] max-h-[538px] min-h-[538px] w-[1314px] z-10 relative" src={welcomeImage} alt="alien welcoming to game" />}
         <div className="typewriter-text absolute top-[215px] left-[535px] transform -translate-x-1/2 w-[740px] whitespace-pre-line text-left leading-[1] font-typewriter text-[24px] z-30">
         {displayText}
         </div> 

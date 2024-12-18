@@ -27,8 +27,7 @@ function GameplayPage({ onLogOut }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showWellPlayedBanner, setShowWellPlayedBanner] = useState(false);
   const [isGameFinished, setIsGameFinished] = useState(false);
-  const [flashIndex, setFlashIndex] = useState(null); // New state for flashing item
-
+  const [flashIndex, setFlashIndex] = useState(null);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
@@ -70,11 +69,9 @@ function GameplayPage({ onLogOut }) {
           return newIcons;
         });
 
-        // Trigger flash for the new item
         setFlashIndex(rewardIndex);
-
-        // Remove flash class after animation completes
-        setTimeout(() => setFlashIndex(null), 2000); // Matches animation duration
+        
+        setTimeout(() => setFlashIndex(null), 2000); 
         return updatedRewards;
       });
 

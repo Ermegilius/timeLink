@@ -3,7 +3,7 @@ import WelcomeBanner from "../../components/WelcomeBanner/WelcomeBanner";
 
 const Home = () => {
   return (
-    <div className="welcomePage max-h-[541px]">
+    <div className="welcomePage w-full h-[544px] max-h-[544px] min-h-[544px]">
       <WelcomeBanner/>
       <div className="flex w-full h-full justify-center">
         {/* Login */}
