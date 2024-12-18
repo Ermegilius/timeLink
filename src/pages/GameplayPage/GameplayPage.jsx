@@ -128,13 +128,13 @@ function GameplayPage({ onLogOut }) {
       </div>
     ) : (
         <div className="boxForGameplayAndMenu flex flex-row flex-nowrap gap-12 w-full h-[541px] max-h-[541px]">
-          <div className="boxForGameplayAndItems flex flex-col flex-nowrap w-full h-full relative z-20 border-2 border-[#8168fe] rounded-md shadow-[0_4px_4px_rgba(0,0,0,0.25),0_3px_6px_rgba(0,0,0,0.22)]">
-            <div className="boxForGameplay block w-full h-[541px] max-h-[541px]">
+          <div className="boxForGameplayAndItems flex flex-col flex-nowrap w-full h-[541px] max-h-[541px] min-h-[541px] relative z-20 border-2 border-[#8168fe] rounded-md shadow-[0_4px_4px_rgba(0,0,0,0.25),0_3px_6px_rgba(0,0,0,0.22)]">
+            <div className="boxForGameplay block w-full h-[465px] max-h-[465px] min-h-[465px]">
               {showWellPlayedBanner ? (
                 <WellPlayedBanner />
               ) : (
                 <>
-                  <div className="playboard h-80 w-full z-10 absolute opacity-100">
+                  <div className="playboard w-full h-[465px] max-h-[465px] min-h-[465px] z-10 absolute opacity-100">
                     {
                       <img
                         className="playboard-img"
@@ -144,7 +144,7 @@ function GameplayPage({ onLogOut }) {
                     }
                   </div>
                   <div
-                    className="playboard-grid grid grid-cols-14 gap-0 h-full w-full z-20"
+                    className="playboard-grid grid grid-cols-14 gap-0 w-full h-[465px] max-h-[465px] min-h-[465px] z-20"
                     id="playboard-grid"
                   >
                     {[...Array(294)].map((_, index) => (
@@ -160,7 +160,7 @@ function GameplayPage({ onLogOut }) {
                 </>
               )}
             </div>
-            <div id="itemList" className="itemList flex flex-row flex-nowrap w-full bg-[#d9f9cf] border-t-2 border-[#8168fe] rounded-b-md">
+            <div id="itemList" className="itemList flex flex-row flex-nowrap w-full bg-[#d9f9cf] border-t-2 border-[#8168fe] rounded-b-md z-40">
               {icons.map((icon, index) => (
                 <div
                   key={index}
