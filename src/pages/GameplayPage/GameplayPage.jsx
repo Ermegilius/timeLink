@@ -1,100 +1,135 @@
 import { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 import boardImage from "../../assets/gameboard.png";
 import userPic from "../../assets/userpic.svg";
 import alienImage from "../../assets/alienbob.png";
 import lockIcon from "../../assets/icons8-lock-64.png";
-import starIcon from "../../assets/icons8-star-96.png";
 import placeAlienOnGrid from "../../utilities/placeAlienOnGrid";
 import Modal from "../../components/GamePlay/Modal/Modal";
 import Button from "../../components/Button/Button";
-
-import MusicPlayer from "../../components/MusicPlayer/MusicPlayer"; //music player component
+import MusicPlayer from "../../components/MusicPlayer/MusicPlayer";
 import { AuthContext } from "../../providers/AuthProvider";
+import { GameplayItems } from "../../BigVariables/BigVariables";
 import { GameplayTimes } from "../../BigVariables/BigVariables";
+import { GameplayTimeTitles } from "../../BigVariables/BigVariables";
+import { BorderColors } from "../../BigVariables/BigVariables";
 import FinishedGameBanner from "../../components/FinishedGameBanner/FinishedGameBanner";
-import WellPlayedBanner from "../../components/WellPlayedBanner/WellPlayedBanner"; // Import WellPlayedBanner
+import WellPlayedBanner from "../../components/WellPlayedBanner/WellPlayedBanner";
 
 const gameplayFields = [116, 87, 200, 48, 212, 120, 205, 52, 165, 82, 223, 154]; // Playable fields
 
 function GameplayPage({ onLogOut }) {
   const { user } = useContext(AuthContext);
   const [currentFieldIndex, setCurrentFieldIndex] = useState(0);
+  const [gameStarted, setGameStarted] = useState(false);
   const [rewards, setRewards] = useState([]);
-  const [icons, setIcons] = useState(Array(10).fill(lockIcon)); // Initialize with default icons
-  const borderColors = [
-    "border-[#FFFFBB]",
-    "border-[#FFDDBB]",
-    "border-[#FFBBBB]",
-    "border-[#FFBBDD]",
-    "border-[#FFBBFF]",
-    "border-[#DDBBFF]",
-    "border-[#BBDDFF]",
-    "border-[#BBFFFF]",
-    "border-[#BBFFDD]",
-    "border-[#BBFFBB]",
-  ];
-  const [isModalOpen, setIsModalOpen] = useState(false); // modal is closed by default
-  const [showWellPlayedBanner, setShowWellPlayedBanner] = useState(false); // State for WellPlayedBanner
-  const [isGameFinished, setIsGameFinished] = useState(false); // Track if the game is finished
+  const [icons, setIcons] = useState(Array(10).fill(lockIcon));
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showWellPlayedBanner, setShowWellPlayedBanner] = useState(false);
+  const [isGameFinished, setIsGameFinished] = useState(false);
+  const [flashIndex, setFlashIndex] = useState(null); // New state for flashing item
+
   const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  // Initialize the avatar at the starting grid
   useEffect(() => {
-    const startingFieldId = `${gameplayFields[0]}`; // Get the starting grid ID
-    placeAlienOnGrid(startingFieldId, alienImage); // Place the alien on the grid
+    const startingFieldId = `${gameplayFields[0]}`;
+    placeAlienOnGrid(startingFieldId, alienImage);
   }, []);
 
   useEffect(() => {
     const currentFieldId = `${gameplayFields[currentFieldIndex]}`;
-    placeAlienOnGrid(currentFieldId, alienImage); // Ensure alien is placed on the correct field
+    placeAlienOnGrid(currentFieldId, alienImage);
   }, [currentFieldIndex, showWellPlayedBanner]);
+
+  const handleStartGame = () => {
+    setGameStarted(true);
+    setCurrentFieldIndex(1);
+  };
 
   const handleMoveNext = () => {
     const nextIndex = (currentFieldIndex + 1) % gameplayFields.length;
     const nextFieldId = `${gameplayFields[nextIndex]}`;
-    placeAlienOnGrid(nextFieldId, alienImage); // Move the alien to the next grid
+    placeAlienOnGrid(nextFieldId, alienImage);
     setCurrentFieldIndex(nextIndex);
   };
 
   const handleCorrectAnswer = () => {
-    setShowWellPlayedBanner(true); // Show WellPlayedBanner when modal is closed
-    setTimeout(() => {
-      setShowWellPlayedBanner(false); // Hide after 5 seconds
-      handleMoveNext(); // Automatically move the avatar to the next grid
-    }, 4000);
-    setRewards((prevRewards) => [...prevRewards, "Reward"]); // Add a prize to rewards
-    setIcons((prevIcons) => {
-      const newIcons = [...prevIcons];
-      newIcons[rewards.length] = starIcon; // Update the icon for the current reward (to star now)
-      return newIcons;
-    });
-  };
-  const allRewardsCollected = rewards.length === gameplayFields.length; // Check if all rewards are collected
+    setTimeout(() => setShowWellPlayedBanner(true), 1800);
 
-  // Function to finish the game
+    setTimeout(() => {
+      setRewards((prevRewards) => {
+        const updatedRewards = [...prevRewards, "Reward"];
+        const rewardIndex = updatedRewards.length - 1;
+
+        setIcons((prevIcons) => {
+          const newIcons = [...prevIcons];
+          if (rewardIndex < GameplayItems.length) {
+            newIcons[rewardIndex] = GameplayItems[rewardIndex];
+          }
+          return newIcons;
+        });
+
+        // Trigger flash for the new item
+        setFlashIndex(rewardIndex);
+
+        // Remove flash class after animation completes
+        setTimeout(() => setFlashIndex(null), 2000); // Matches animation duration
+        return updatedRewards;
+      });
+
+      setTimeout(() => {
+        setShowWellPlayedBanner(false);
+        handleMoveNext();
+      }, 1500);
+    }, 3000);
+  };
+
   const finishGame = () => {
     setIsGameFinished(true);
   };
 
-  // Call finishGame when the game is finished
   useEffect(() => {
     if (currentFieldIndex === gameplayFields.length - 1) {
-      finishGame();
+      const timer = setTimeout(() => {
+        finishGame();
+      }, showWellPlayedBanner ? 6000 : 4000);
+
+      return () => clearTimeout(timer);
     }
-  }, [currentFieldIndex]);
+  }, [currentFieldIndex, showWellPlayedBanner]);
 
   return (
     <main>
-      {isGameFinished ? (
+    {isGameFinished ? (
+      <div className="finished-game-container">
         <FinishedGameBanner />
-      ) : (
-        <div className="boxForGameplayAndMenu flex flex-row flex-nowrap gap-12 w-full h-[79.8vh]">
+        <div className="button-group flex flex-row gap-4">
+          <button
+          className="play-again-btn h-14 w-52 p-1.5 text-[26px] absolute top-[550px] left-[720px] z-30"
+          onClick={() => {
+            setCurrentFieldIndex(0);
+            setGameStarted(false);
+            setRewards([]);
+            setIcons(Array(10).fill(lockIcon));
+            setIsGameFinished(false);
+          }}
+        >
+            Play Again
+          </button>
+          <Link to="/">
+          <button
+          className="exit-btn h-14 w-52 p-1.5 text-[26px] absolute top-[550px] left-[980px] z-30"
+          >
+            Exit
+          </button>
+          </Link>
+        </div>
+      </div>
+    ) : (
+        <div className="boxForGameplayAndMenu flex flex-row flex-nowrap gap-12 w-full h-[541px] max-h-[541px]">
           <div className="boxForGameplayAndItems flex flex-col flex-nowrap w-full h-full relative z-20 border-2 border-[#8168fe] rounded-md shadow-[0_4px_4px_rgba(0,0,0,0.25),0_3px_6px_rgba(0,0,0,0.22)]">
-            <div className="boxForGameplay block h-full w-full">
+            <div className="boxForGameplay block w-full h-[541px] max-h-[541px]">
               {showWellPlayedBanner ? (
                 <WellPlayedBanner />
               ) : (
@@ -129,13 +164,19 @@ function GameplayPage({ onLogOut }) {
               {icons.map((icon, index) => (
                 <div
                   key={index}
-                  className="item flex justify-center items-center bg-[#fefffa] h-[70px] w-[10%] p-2 border-l border-r border-[#8168fe] relative"
+                  className={`item flex justify-center items-center bg-[#fefffa] h-[70px] w-[10%] p-2 border-l border-r border-[#8168fe] relative ${
+                    flashIndex === index ? "animate-flash" : ""
+                  }`}
                 >
                   <div
-                    className={`absolute inset-0 border-[6px] ${borderColors[index % borderColors.length]} flex justify-center items-center`}
+                    className={`absolute inset-0 border-[6px] ${BorderColors[index % BorderColors.length]} flex justify-center items-center`}
                   >
-                    <img src={icon} className="lockIcon w-[40px] mx-4" alt="icon" />
-                  </div>
+                     <img
+                        src={icon}
+                        className={`${icon === lockIcon ? "w-[40px]" : "max-h-[40px] max-w-[65px]"} mx-4`}
+                        alt="icon"
+                      />
+                    </div>
                 </div>
               ))}
             </div>
@@ -144,7 +185,7 @@ function GameplayPage({ onLogOut }) {
             <div id="user" className="user flex flex-col items-center">
               <img
                 src={userPic}
-                className="align-self-end w-[180px] max-h-[80px] pt-2 pr-4 pl-2 bg-[#fefffa] rounded-t-md border-b-[1px] border-l-2 border-r-2 border-t-2 border-[#8168fe]"
+                className="align-self-end bg-[#cde4ff] w-[180px] max-h-[80px] pt-2 pr-4 pl-2 rounded-t-md border-b-[1px] border-l-2 border-r-2 border-t-2 border-[#8168fe]"
                 alt="little Alien"
               />
               <h3
@@ -156,12 +197,18 @@ function GameplayPage({ onLogOut }) {
             </div>
             <div
               id="gameProgress"
-              className="gameProgress h-38 w-[180px] mt-4 mb-0 p-1 bg-[#fefffa] rounded-md border-2 border-[#8168fe] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
+              className="gameProgress text-[14px] leading-4 text-center h-[160px] w-[180px] mt-4 mb-0 p-[0.5rem] bg-[#fefffa] rounded-md border-2 border-[#8168fe] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
             >
-              <p>{`You are in ${GameplayTimes[currentFieldIndex]}`}</p>
+              <p>You are in</p>
+              <p className="text-[16px] leading-6 text-[#1e83ff]">{GameplayTimeTitles[currentFieldIndex]}</p>
+              <p>{GameplayTimes[currentFieldIndex]}</p>
             </div>
             <div>
-              <Button text={currentFieldIndex === 0 ? "Start riddles" : currentFieldIndex !== 11 ? "Next riddle" : "Finish game"} onClick={currentFieldIndex !== 11 ? openModal : finishGame} className="my-0" />
+            <Button
+                text={!gameStarted ? "Start game" : currentFieldIndex !== 11 ? "Next riddle" : "Finish game"}
+                onClick={!gameStarted ? handleStartGame : currentFieldIndex !== 11 ? openModal : finishGame}
+                className="my-0"
+              />
               <Modal
                 isOpen={isModalOpen}
                 onClose={closeModal}
@@ -171,7 +218,7 @@ function GameplayPage({ onLogOut }) {
               />
 
             </div>
-            <div className="musicBox w-[180px] h-32 p-1 bg-[#fefffa] rounded-md border-2 border-[#8168fe] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
+            <div className="musicBox w-[180px] h-32">
               <MusicPlayer />
             </div>
           </aside>
@@ -179,6 +226,6 @@ function GameplayPage({ onLogOut }) {
       )}
     </main>
   );
-}
+}// End of GameplayPage
 
 export default GameplayPage;
