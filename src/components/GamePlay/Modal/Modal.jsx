@@ -24,7 +24,7 @@ const Modal = ({ isOpen, onClose, handleCorrectAnswer }) => {
 
       // Fetch incorrect answers
       const wordsResponse = await fetch(
-        "https://random-word-api.herokuapp.com/word?number=3"
+        "https://random-word-api.vercel.app/api?words=3"
       );
       const wordsData = await wordsResponse.json();
       console.log("Fetched Incorrect Answers:", wordsData);
