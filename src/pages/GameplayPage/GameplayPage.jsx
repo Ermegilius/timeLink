@@ -1,18 +1,15 @@
 import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
+import { GameplayItems, GameplayTimes, GameplayTimeTitles, BorderColors } from "../../BigVariables/BigVariables";
 import boardImage from "../../assets/gameboard.png";
 import userPic from "../../assets/userpic.svg";
 import alienImage from "../../assets/alienbob.png";
-import lockIcon from "../../assets/icons8-lock-64.png";
+import lockIcon from "../../assets/collect_items/default_icons8-lock-64.png";
 import placeAlienOnGrid from "../../utilities/placeAlienOnGrid";
 import Modal from "../../components/GamePlay/Modal/Modal";
 import Button from "../../components/Button/Button";
 import MusicPlayer from "../../components/MusicPlayer/MusicPlayer";
-import { AuthContext } from "../../providers/AuthProvider";
-import { GameplayItems } from "../../BigVariables/BigVariables";
-import { GameplayTimes } from "../../BigVariables/BigVariables";
-import { GameplayTimeTitles } from "../../BigVariables/BigVariables";
-import { BorderColors } from "../../BigVariables/BigVariables";
 import FinishedGameBanner from "../../components/FinishedGameBanner/FinishedGameBanner";
 import WellPlayedBanner from "../../components/WellPlayedBanner/WellPlayedBanner";
 
@@ -127,14 +124,14 @@ function GameplayPage({ onLogOut }) {
         </div>
       </div>
     ) : (
-        <div className="boxForGameplayAndMenu flex flex-row flex-nowrap gap-12 w-full h-[541px] max-h-[541px]">
-          <div className="boxForGameplayAndItems flex flex-col flex-nowrap w-full h-full relative z-20 border-2 border-[#8168fe] rounded-md shadow-[0_4px_4px_rgba(0,0,0,0.25),0_3px_6px_rgba(0,0,0,0.22)]">
-            <div className="boxForGameplay block w-full h-[541px] max-h-[541px]">
+        <div className="boxForGameplayAndMenu h-[542px] max-h-[542px] min-h-[542px] w-[1310px] max-w-[1310px] min-w-[1310px] flex flex-row flex-nowrap gap-12 ">
+          <div className="boxForGameplayAndItems h-[541px] max-h-[541px] min-h-[541px] w-[1044x] max-w-[1044px] min-w-[1044px] flex flex-col flex-nowraprelative z-20 border-2 border-[#8168fe] rounded-md shadow-[0_4px_4px_rgba(0,0,0,0.25),0_3px_6px_rgba(0,0,0,0.22)]">
+            <div className="boxForGameplay h-[465px] max-h-[465px] min-h-[465px] w-[1044px] max-w-[1044px] min-w-[1044px] block ">
               {showWellPlayedBanner ? (
                 <WellPlayedBanner />
               ) : (
                 <>
-                  <div className="playboard h-80 w-full z-10 absolute opacity-100">
+                  <div className="playboard h-[465px] max-h-[465px] min-h-[465px] w-[1042px] max-w-[1042px] min-w-[1042px] z-10 absolute opacity-100">
                     {
                       <img
                         className="playboard-img"

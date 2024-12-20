@@ -21,8 +21,8 @@ import beamBobImage from '../../assets/beambob.png';
     }, []); 
   
   return (
-    <div className="finishedgame-banner border-2 border-[#8168fe] rounded-md shadow-[0_4px_4px_rgba(0,0,0,0.25),0_3px_6px_rgba(0,0,0,0.22)]">
-        <img className="finishedgame-img block w-full h-[541px] max-h-[541px] z-10 relative" src={finishedGameImage} alt="alien beamed up to ufo to leave back to home planet" />
+    <div className="finishedgame-banner border-2 border-[#8168fe] h-[541px] max-h-[541px] min-h-[541px] w-[1310px] max-w-[1310px] min-w-[1310px] rounded-md shadow-[0_4px_4px_rgba(0,0,0,0.25),0_3px_6px_rgba(0,0,0,0.22)]">
+        <img className="finishedgame-img block h-[537px] max-h-[5371px] min-h-[537px] w-[1310px] max-w-[1310px] min-w-[1310px z-10 relative" src={finishedGameImage} alt="alien beamed up to ufo to leave back to home planet" />
         <div className="ufo-image">
             <img className="ufo-image absolute top-[196px] left-[309px] z-30 animate-move-up-slide-out" src={ufoImage} alt="ufo image" />
         </div>  

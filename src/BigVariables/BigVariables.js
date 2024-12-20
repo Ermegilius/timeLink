@@ -1,14 +1,14 @@
-import item1 from "../assets/collect_items/1.png";
-import item2 from "../assets/collect_items/2.png";
-import item3 from "../assets/collect_items/3.png";
-import item4 from "../assets/collect_items/4.png";
-import item5 from "../assets/collect_items/5.png";
-import item6 from "../assets/collect_items/6.png";
-import item7 from "../assets/collect_items/7.png";
-import item8 from "../assets/collect_items/8.png";
-import item9 from "../assets/collect_items/9.png";
-import item10 from "../assets/collect_items/10.png";
-import item11 from "../assets/collect_items/11.png";
+import item1 from "../assets/collect_items/1_bacteria.png";
+import item2 from "../assets/collect_items/2_Dickinsonia_costata_A.png";
+import item3 from "../assets/collect_items/3_Hallucigenia_reconstructions.png";
+import item4 from "../assets/collect_items/4_sauropod-emoji-clipart-lg.png";
+import item5 from "../assets/collect_items/5_stone-axe.png";
+import item6 from "../assets/collect_items/6_ceramic.png";
+import item7 from "../assets/collect_items/7_pngegg.png";
+import item8 from "../assets/collect_items/8_printing-press.png";
+import item9 from "../assets/collect_items/9_icons8-idea-80.png";
+import item10 from "../assets/collect_items/10_pngegg.png";
+import item11 from "../assets/collect_items/11_icons8-star-9.png";
 
 const GameplayItems = [
     item1,
@@ -25,8 +25,6 @@ const GameplayItems = [
 ];
 
 export { GameplayItems };
-
-
 
 const GameplayTimes = [
     "You have arrived here at the origin of the Earth, 4.6 billion years ago.",
