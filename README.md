@@ -2,7 +2,19 @@
 
 ## Overview
 
-This is our teams very first browser game built with React and Firebase. We are proud to present: Time Link. The little Alien Bob travels through the earth's history and ends up at his spaceship in the time when he came to visit and travels home. Our team: Vladimir Beliakov, Balaeat Hossain, Saara Rikama and Stefanie Jana.
+This is a fork of our study team project.
+
+Our team members are:
+
+- Md Belaeat Hossain https://github.com/belaeat
+- SaaraRi https://github.com/SaaraRi
+- Vladimir Beliakov (me) https://github.com/Ermegilius
+- Stefanie 'Steffi' https://github.com/stabjana
+
+From the end of December 2024 I continue enhancing the project in this fork aiming further study and practice.
+
+This is the very first browser game built with React.
+We are proud to present: _Time Link_. The little Alien Bob travels through the earth's history and ends up at his spaceship in the time when he came to visit and travels home. Our team: Vladimir Beliakov, Balaeat Hossain, Saara Rikama and Stefanie Jana.
 
 **This repository contains the latest version of our game**
 
