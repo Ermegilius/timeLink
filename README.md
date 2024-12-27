@@ -14,15 +14,8 @@ Our team members are:
 From the end of December 2024 I continue enhancing the project in this fork aiming further study and practice.
 
 This is the very first browser game built with React.
-We are proud to present: _Time Link_. The little Alien Bob travels through the earth's history and ends up at his spaceship in the time when he came to visit and travels home. Our team: Vladimir Beliakov, Balaeat Hossain, Saara Rikama and Stefanie Jana.
-
-**This repository contains the latest version of our game**
-
-We used another repository first and then our brave Balaeat cleaned up the file structure and we moved to this repository. The other repo contains most of our planning and ideas, and also the first prototype of the game.
-
-https://github.com/stabjana/timeShifters_team2
-
-We aimed to have an educational game that leads through the earth's prehistory and history. The Players answer questions to proceed on the gameplay field and collects a reward for every correct answer given.
+We are proud to present: Time Link.
+The little Alien Bob travels through the Earth's history and ends up at his spaceship in the time when he came to visit and travels home.
 
 ## Features
 
@@ -73,28 +66,20 @@ git clone
 
 ### Step 2:
 
-- Install vite
-
-```shell
- npm install vite
-```
-
-### Step 3:
-
 - Run the project
 
 ```shell
- npm run dev
+ npm run fyl
 ```
 
 ## Enhancements for the Future
 
 - add historical related riddles
 - adding different minigames in addition to the questions
-- add random historical facts?
-- refining the music player to play more songs, jumping to beginning of song and next song
-- add a multiplayer functionality
+- add random historical facts
+- refining the music player. Make it use API for random music (by genre)
 - adding more backend to handle the gameplay better
+- deploying the game to a server
 - creating a database for users and game progress
 - adding a scoring system
 - creating a high score leaderboard
